@@ -1,9 +1,6 @@
+<?php include_once './conexao.php'; ?>
 <p><a href="form-imagem.php">Cadastrar </a></p>
 <?php
-
-$conexao = new PDO("mysql:host=localhost;dbname=banco_aula", "root", "");
-$conexao->exec("SET CHARACTER SET utf8");
-
 echo "<h1>Listar imagens</h1>";
 
 try {

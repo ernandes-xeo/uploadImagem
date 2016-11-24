@@ -1,40 +1,28 @@
 <?php
-
-// https://www.oficinadanet.com.br/post/9062-upload-de-imagem-com-php-e-mysql
 /*
-  CREATE TABLE `galeria` (
-  `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `foto` VARCHAR(255) NULL DEFAULT NULL,
-  `nome` VARCHAR(255) NOT NULL,
-  `email` VARCHAR(255) NOT NULL,
-  `senha` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`id`)
-  )
-  ENGINE=InnoDB
-  ;
+ * Código adaptado Oficina da Net
+ * Ernandes Xeo
+ * Ref.:
+ * https://www.oficinadanet.com.br/post/9062-upload-de-imagem-com-php-e-mysql
+ * Verificar validações para salvar imagens
  */
 
+include_once './conexao.php';
+
+// dados recebidos do formulário
 $foto = $_FILES["imagem"];
 $nome = $_POST["nome"];
 $email = $_POST["email"];
 $senha = $_POST["senha"];
 
 
-
-if (!preg_match("/^image\/(pjpeg|jpeg|JPG|png|gif|bmp)$/", $foto["type"])) { //formato de imagem aceitos 
+// Expressão regular 
+//formato de imagem aceitos 
+if (!preg_match("/^image\/(pjpeg|jpeg|JPG|png|gif|bmp)$/", $foto["type"])) { 
     header("location:form-imagem.php?");
 } else {
     echo "Erro no formato/tamanho";
     header("location:form-imagem.php?");
-}
-// pode usar include conexao, que foi o que fiz no meu. Mas a conexao em PDO segue abaixo: 
-$conexao = new PDO("mysql:host=localhost;dbname=banco_aula", "root", "");
-$conexao->exec("SET CHARACTER SET utf8");
-
-try {
-    $pdo = $conexao;
-} catch (PDOException $e) {
-    echo $e->getMessage;
 }
 
 $inserir = $pdo->prepare("INSERT INTO galeria(foto, nome, email, senha) VALUES(:foto, :nome, :email, :senha)");
