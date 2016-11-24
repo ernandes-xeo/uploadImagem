@@ -48,7 +48,7 @@ if (!empty($foto["name"])) {
     $caminho_imagem = "media/" . $nome_imagem;
     move_uploaded_file($foto["tmp_name"], $caminho_imagem);
 }
-
+// poderia tratar dados recebidos do formulário, validando se eles foram prenchidos
 $inserir->bindValue(":foto", $nome_imagem);
 $inserir->bindValue(":nome", $nome);
 $inserir->bindValue(":email", $email);
