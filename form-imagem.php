@@ -55,7 +55,7 @@
                     <input type="text" name="email" />
                 
                 <label for="nome">Senha:</label>
-                    <input type="text" name="senha" />
+                <input type="password" name="senha" />
                 
 
                 <input type="submit" class="salvar" value="Salvar" name="submit">

@@ -16,6 +16,7 @@ $email = $_POST["email"];
 $senha = $_POST["senha"];
 
 
+
 // Expressão regular 
 //formato de imagem aceitos 
 if (!preg_match("/^image\/(pjpeg|jpeg|JPG|png|gif|bmp)$/", $foto["type"])) { 
@@ -31,7 +32,8 @@ if (!empty($foto["name"])) {
     // verifica se é um arquivo de imagem
     preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $foto["name"], $ext);
     // Gera um nome único para a imagem 
-    $nome_imagem = md5(uniqid(time())) . "." . $ext[1];
+    $nome_imagem =  date('Y-m-d-His')."_".$foto["name"];
+    
     //Cria uma pasta dentro do projeto 
     $caminho_imagem = "media/" . $nome_imagem;
     move_uploaded_file($foto["tmp_name"], $caminho_imagem);
@@ -42,8 +44,8 @@ $inserir->bindValue(":nome", $nome);
 $inserir->bindValue(":email", $email);
 $inserir->bindValue(":senha", md5($senha));
 
-$inserir->execute();
-if ($inserir) {
+
+if ($inserir->execute()) {
     header("location:listar-imagem.php?");
 } else {
     header("location:form-imagem.php?");
